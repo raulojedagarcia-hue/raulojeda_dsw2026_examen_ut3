@@ -1,0 +1,22 @@
+info:
+  name: 07 - Publicar una pregunta nueva
+  type: http
+  seq: 7
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/v1/questions"
+  body:
+    type: json
+    data: |-
+      {
+        "question":"hola"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
