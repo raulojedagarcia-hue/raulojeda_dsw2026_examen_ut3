@@ -6,6 +6,7 @@ import type { NextFunction, Request, Response } from 'express';
 
 import { AppError } from '../errors/AppError.js';
 import * as articlesService from '../services/articlesService.js';
+import { AppErrorDescription } from '../errors/AppErrorDescription.js';
 
 export function list(req: Request, res: Response, next: NextFunction): void {
   try {
@@ -32,19 +33,19 @@ export function getById(req: Request, res: Response, next: NextFunction): void {
 
 export function create(req: Request, res: Response, next: NextFunction): void {
   console.log('[4] articlesController.create', req.requestId);
-
   try {
     const { title, description } = req.body;
     if (!title || typeof title !== 'string') {
       throw new AppError(400, 'Missing required field: title', 'BAD_REQUEST');
     }
+    if (description == "ERROR") {
+      throw new AppErrorDescription(400, 'Description must be a string', 'BAD_REQUEST');
+    }
     const article = articlesService.create(
       title.trim(),
       typeof description === 'string' ? description.trim() : '',
     );
-
     console.log('[5] Respuesta preparada: 201', req.requestId, { data: article });
-    
     res.status(201).json({ data: article });
   } catch (err) {
     next(err);

@@ -5,6 +5,7 @@
 // Topic 07 hardens this file by validating it with a zod schema.
 
 process.loadEnvFile();
+const PORT: string = 3000; 
 
 export const env = {
   PORT: Number(process.env.PORT ?? 3000),

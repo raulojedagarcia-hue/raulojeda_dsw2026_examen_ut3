@@ -1,0 +1,22 @@
+info:
+  name: 06 - Cambiar título de un documento
+  type: http
+  seq: 6
+
+http:
+  method: PATCH
+  url: "{{baseUrl}}/api/v1/admin/documents/a1c6b6e3-3b85-406a-a59b-99b36f74de26"
+  body:
+    type: json
+    data: |-
+      {
+        "title":"Y"
+      }  
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
